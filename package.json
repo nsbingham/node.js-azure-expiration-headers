@@ -1,0 +1,12 @@
+{
+  "name": "modernie_blob",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "azure": "~0.6.10"
+  }
+}
