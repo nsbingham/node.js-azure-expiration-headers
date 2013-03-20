@@ -3,22 +3,40 @@
 
    "use strict";
     var azure = require('azure');
-    var blobService = azure.createBlobService("DefaultEndpointsProtocol=http;AccountName={account_name};AccountKey={account_key}");
-    var containerName = "{container_name}";
+    var blobService = azure.createBlobService("{AzureCredentialsGoHere}");
+    var containerName = "";
     var cacheControlLength = "604800"; // 7 days in seconds
 
-    function setCacheControlHeader(blobName){
-        blobService.setBlobProperties(containerName, blobName, {cacheControlHeader:"public, max-age=" + cacheControlLength}, function(){
+    function setHeaders(blobName){
+        var headers = {cacheControlHeader:"public, max-age=" + cacheControlLength, contentType:"application/octet-stream"};
+
+        blobService.setBlobProperties(containerName, blobName, headers, function(){
             console.log("Header set for: " + blobName);
         });
     }
 
+    function isVM(name){
+
+        if(name.indexOf('.sfx') > -1 || name.indexOf('.rar') > -1 || name.indexOf('.zip') > -1){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     blobService.listBlobs(containerName, function(error, blobs){
         if(!error){
+
             for(var index in blobs){
-                console.log("Found: " + blobs[index].name);
-                setCacheControlHeader(blobs[index].name);
+
+                if(isVM(blobs[index].name)){
+                    console.log(blobs[index].name);
+                    setHeaders(blobs[index].name);
+                }
+
             }
+
         }
 
     });
