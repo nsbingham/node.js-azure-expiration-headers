@@ -7,6 +7,6 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "azure": "~0.6.10"
+    "azure": ""
   }
 }
