@@ -2,9 +2,9 @@
 (function () {
 
    "use strict";
- 
+
     var azure = require('azure');
-    var blobService = azure.createBlobService("winstoreprod","o8ZpcpuqZogcuAW7pKf7CLF9NcWs0Yus4m9FMLWQBPnq6eZC9l4AwCimP2/J5TlnC8/Rs2NkwhbXrgFv0xhS1Q==");
+    var blobService = azure.createBlobService("modernievirt","PHahBCdmHiS34IeXOF9RWCGz8Urk9SZmSGe2bRRCFbYfj74R7CG5GH+4FYEJll/xiyr4UOjWZcGsYwUMSW8INA==");
     var containerName = "vhd";
     var cacheControlLength = "604800"; // 7 days in seconds
 
@@ -14,7 +14,7 @@
 
         if(error) throw error;
 
-        properties['DefaultServiceVersion'] = '2013-03-01';
+        properties['DefaultServiceVersion'] = '2013-08-15';
 
         console.log('modified properties', properties);
 
@@ -35,7 +35,7 @@
         blobService.setBlobProperties(containerName, blobName, headers, function(){
             console.log("Header set for: " + blobName);
         });
-            
+
 
     }
 
